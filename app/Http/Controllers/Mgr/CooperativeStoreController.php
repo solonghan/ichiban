@@ -25,6 +25,7 @@ class CooperativeStoreController extends Mgr
 		['店家名',       'name',      'text',   TRUE, '', 6, 12, '',[200]],
 		['排序',	    'sort',     'number', FALSE, 0, 3, 12, '', [200]],
 		['封面圖',	    'logo',       'image',   TRUE, '比例 360:230', 6, 12, '', [360/230]],
+		['多圖上傳',		'pics',			'img_multi',   FALSE, '建議比例 3:2', 12, 12, '', [3/2]],
 		['摘要',        'summary',     'editor',   TRUE, '', 12, 12, '',[200]],
 		['內文',	    'content',     'editor',   TRUE, '', 12, 12, '', [200]],
 
@@ -114,28 +115,18 @@ class CooperativeStoreController extends Mgr
             $obj[] = $item->sort;
             $obj[] = $item->name;
             $obj[] = $item->logo;
-
 			$obj[] = $item->summary;
             $obj[] = $item->content;
-            
-
 			// $obj[] = $item->email;
 			// $obj[] = $item->phone;
             // $obj[] = $item->address;
             // $obj[] = $item->website;
-
 			$obj[] = $item->email.'<br>'.$item->phone.'<br>'.$item->website.'<br>'.$item->address;
-			$obj[] = $item->fb.'<br>'.$item->line.'<br>'.$item->ig;
+			
 			// $obj[] = $item->fb;
             // $obj[] = $item->line;
             // $obj[] = $item->ig;
-			
-			// $obj[] = $item->stock.' / '.$item->total_quantity;
-			// if($item->status=='on'){
-			// 	$status='啟用';
-			// }else{
-			// 	$status='關閉';
-			// }
+			$obj[] = $item->fb.'<br>'.$item->line.'<br>'.$item->ig;
             $obj[] = $status;
             $obj[] = $item->created_at;
 
@@ -181,7 +172,7 @@ class CooperativeStoreController extends Mgr
 			if ($res) {
 				// Media::save_media('faq_cover', $res->id, $formdata['cover'].";");
 				// Media::save_media('faq_thumb', $res->id, $formdata['thumb'].";");
-				// Media::save_media('faq_pics', $res->id, $request->post('pics'), $request->post('picdeleted_pics'));
+				Media::save_media('faq_pics', $res->id, $request->post('pics'), $request->post('picdeleted_pics'));
 
 				// $res->tags_refresh($request->post('tags'));
 
@@ -219,7 +210,7 @@ class CooperativeStoreController extends Mgr
 			if ($res) {
 				// Media::save_media('faq_cover', $id, $formdata['cover'].";");
 				// Media::save_media('faq_thumb', $id, $formdata['thumb'].";");
-				// Media::save_media('faq_pics', $id, $request->post('pics'), $request->post('picdeleted_pics'));
+				Media::save_media('cooperative_store_pics', $id, $request->post('pics'), $request->post('picdeleted_pics'));
 
 				// $res->tags_refresh($request->post('tags'));
 
@@ -244,9 +235,10 @@ class CooperativeStoreController extends Mgr
 		
 		// $data = $data->toArray();
 
-		// $pics = Media::fetch_to_generate_template('pics', 'faq_pics', $id);
-		// $data['pics'] = $pics['value'];
-		// $this->data['html']['pics'] = $pics['html'];
+		$pics = Media::fetch_to_generate_template('pics', 'cooperative_store_pics', $id);
+		// print_r($pics);exit;
+		$data['pics'] = $pics['value'];
+		$this->data['html']['pics'] = $pics['html'];
 		// $data['tags'] = $tags;
 		$this->data['params'] = $this->generate_param_to_view($this->param, $data);
 		// print_r($this->data['params']);exit;
