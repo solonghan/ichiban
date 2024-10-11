@@ -22,11 +22,12 @@ use App\Models\Notification;
 use App\Models\Product;
 use App\Models\JobTitle;
 
-
 use App\Models\Dist;
 use Auth;
 class BaseController extends Controller
 {
+	//隨便測試
+	
     protected $debug_mode = true;
     
 	protected $data = array();
