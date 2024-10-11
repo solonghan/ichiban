@@ -22,6 +22,11 @@ use App\Models\Notification;
 use App\Models\Product;
 use App\Models\JobTitle;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b4f505987eda3949c0fbb43cbd59ae3669fec6c6
 use App\Models\Dist;
 use Auth;
 class BaseController extends Controller
