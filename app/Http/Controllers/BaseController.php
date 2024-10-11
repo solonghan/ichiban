@@ -31,7 +31,7 @@ use App\Models\Dist;
 use Auth;
 class BaseController extends Controller
 {
-	//隨便測試
+	//隨便測試123
 	
     protected $debug_mode = true;
     
